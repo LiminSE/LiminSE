@@ -250,12 +250,12 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -272,6 +272,169 @@ mjx-container[display="true"] + br {
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lmse.design/2025/12/10/git-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lmse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LMSE的咸鱼博客">
+      <meta itemprop="description" content="咸鱼的博主，咸鱼的想法，咸鱼的记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | LMSE的咸鱼博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/12/10/git-md/" class="post-title-link" itemprop="url">用 GitHub Desktop 给论文安排版本控制</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-12-10 21:00:28 / 修改时间：21:10:53" itemprop="dateCreated datePublished" datetime="2025-12-10T21:00:28+08:00">2025-12-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="写在前面">写在前面</h2>
+<p>​ 写论文最痛苦的往往不是「写」本身，而是「改」。</p>
+<p>​ 特别是对于理工科学生，LaTex 是事实标准。但 LaTex
+的纯文本特性加上长周期的写作过程，经常会出现非常蛋疼的情况，版本混乱、思绪错杂。</p>
+<p>​
+版本混乱：我和导师并行修改，文件传来传去，最后不知道哪个才是最新的，全靠肉眼一行行比对，极其消耗精力。而且针对不同的刊物和用途，一个文本又被修改为诸多不同的模式，让人头大。</p>
+<p>​
+思绪错杂：论文投出去，可能两三个月甚至更久才会有反馈。很多时候多防线出击也会导致，当我再次打开文档，面对那堆杂乱的草稿，完全想不起当时为什么要这么写，也忘了哪个版本是「废弃但有保留价值」的思路，最后，文本很多，不知道有啥用。</p>
+<p>​ 最近开始尝试使用 <strong>GitHub Desktop</strong>
+来管理我的论文项目。核心目标只有一个：让写作进度「可分类」、「可回溯」，让我的论文像是代码工程一样进行科学管理。</p>
+<p>​
+如果不把论文当做纯文本，而是当做「代码」来管理，一切都会变得井井有条。</p>
+<h2 id="为什么-latex-需要工作流">为什么 LaTex 需要「工作流」？</h2>
+<p>​ Word 是「所见即所得」，而 LaTex
+是「所想即所得」。既然我们在写代码（LaTex
+源码），就应该用管理代码的方式来管理它。</p>
+<p>​ 传统的文献修改最大的问题是它是线性的。但我们的写作往往是迭代的，引入
+Git，就是为了解决这个非线性问题。</p>
+<h2 id="部署策略">部署策略</h2>
+<p>​ GitHub Desktop 的可视化界面非常直观，足够应对论文管理。</p>
+<p>​ 思路如下：</p>
+<p>1、建立论文仓库（如：my-papers文件夹），每一篇内容独立的论文用一个单独的文件夹保存。</p>
+<p>2、每一篇的论文写作，均只从远程仓库<code>pull</code>当前论文的目录，不影响其他论文。</p>
+<p>3、用至少三个分支进行写作。和程序开发相似，<code>master</code>分支的代码总是submission-ready的。每个合作者的修改单独用一个分支保存，比如<code>co-author</code>分支。收到新的修改后，放到<code>co-author</code>分支下，然后<code>merge</code>到当前写作分支，比如<code>my-writing</code>分支。</p>
+<p>在代码托管网站上建论文仓库没什么可说的，这里只说一下如何每次只<code>pull</code>当前论文的目录。（ref:
+<a
+href="https://link.zhihu.com/?target=https%3A//link.jianshu.com/%3Ft%3Dhttp%3A%2F%2Fblog.algony.net%2F2015%2F05%2Fgit-sparse-checkout%2F">http://blog.algony.net/2015/05/git-sparse-checkout/</a>）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git init &lt;project&gt;      </span><br><span class="line">$ <span class="built_in">cd</span> &lt;project&gt;     </span><br><span class="line">$ git remote add origin &lt;your_remote_paper_repo&gt;     </span><br><span class="line">$ git config core.sparsecheckout <span class="literal">true</span> <span class="comment"># 打开sparse-checkout模式     </span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;&lt;current_paper_dir&gt;&quot;</span> &gt;&gt; .git/info/sparse-checkout <span class="comment"># 设置需要pull的论文目录     </span></span><br><span class="line">$ git pull origin master     </span><br><span class="line">$ &lt;edit_your_paper&gt;  <span class="comment"># 修修补补你的宝贝论文     </span></span><br><span class="line">$ git pull origin master <span class="comment"># 如果远程仓库有新的修改，则pull下来合并，可选     </span></span><br><span class="line">$ git push --set-upstream-to origin master <span class="comment"># 第一次push需要设置本地分支和远程分支的</span></span><br><span class="line">                                           <span class="comment"># 跟踪关系，之后直接&quot;git push origin&quot;就可以</span></span><br></pre></td></tr></table></figure>
+<p>注意事项：</p>
+<ol type="1">
+<li><code>git pull</code>操作相当于<code>git fetch</code> +
+<code>git merge</code>操作组合。因此如果你不止想<code>pull</code>远程仓库里的<code>master</code>分支，而是所有分支，上述命令中的第一个<code>pull</code>操作可以用<code>git fetch origin</code>代替，后者默认下载<code>origin</code>服务器上所有分支，所取回的更新。这些分支在本地主机上要用”远程主机名/分支名”的形式读取，如<code>remotes/origin/master</code>。</li>
+<li><code>git fetch</code>之后本地是没有分支的，本地工作目录也为空。需要在远程分支基础上，使用</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b &lt;new_local_branch&gt; origin/&lt;remote_branch&gt; </span><br></pre></td></tr></table></figure>
+<p>创建一个本地分支<code>&lt;new_local_branch&gt;</code>。</p>
+<ol start="3" type="1">
+<li>或者执行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout merge origin/&lt;remote_branch&gt;  </span><br></pre></td></tr></table></figure>
+<p>将<code>origin/&lt;remote_branch&gt;</code>合并到本地<code>master</code>分支。如果当前没有分支，<code>git merge</code>会在本地创建<code>master</code>分支。</p>
+<ol start="4" type="1">
+<li>或先在本地<code>checkout</code>一个分支，然后执行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/&lt;branch&gt;</span><br></pre></td></tr></table></figure>
+<p>指定当前本地分支跟踪远程分支</p>
+<h3 id="git写latex的流程">Git写Latex的流程</h3>
+<p>(ref: <a
+href="https://link.zhihu.com/?target=https%3A//link.jianshu.com/%3Ft%3Dhttps%3A%2F%2Fstackoverflow.com%2Fquestions%2F6188780%2Fgit-latex-workflow">https://stackoverflow.com/questions/6188780/git-latex-workflow</a>)</p>
+<ol type="1">
+<li>最好每一章一个单独的tex文件，因为论文不中改投的时候可能需要换模板。这时候将每一章直接<code>\input</code>到模板文件里就可以。</li>
+<li>每句话一段。Git的<code>diff</code>默认以行为单位，而Latex只有在每段话前面有空行时才认为是新的段落，所以每句话一段不影响Latex排版，又可以方便Git做<code>diff</code>。你甚至可以<code>git diff --color-words</code>打开逐字比对的效果。</li>
+<li>为每个<code>\section</code>开一个分支。合作论文最常见的情况就是一个人写一章，合作者写/改另一章。为每一章开一个单独的分支，方便跟踪进度和合并。</li>
+<li>全局性的修改，如将整个论文中的“Section”改成“Chapter”，做成单独的<code>commit</code>。导言区的修改也是如此。这样无论是<code>diff</code>或者<code>patch</code>都很清楚做了什么修改，不会和内容修改相混淆。</li>
+</ol>
+<h3 id="和不使用git的合作者合作">和不使用Git的合作者合作</h3>
+<p>(ref: <a
+href="https://link.zhihu.com/?target=https%3A//link.jianshu.com/%3Ft%3Dhttp%3A%2F%2Fwww.math.cmu.edu%2F%7Egautam%2Fsj%2Fblog%2F20130929-git-quickstart.html">http://www.math.cmu.edu/~gautam/sj/blog/20130929-git-quickstart.html</a>)</p>
+<p>你没有办法让你的合作者为了改你的论文在学会了Latex之后还专门去学Git，尤其是那些德高望重的合作者，比如你的导师。而他们的意见和修改，一般来说是非听不可的。这时我们面临的主要问题有两个：</p>
+<ol type="1">
+<li>记住交给合作者的论文版本</li>
+<li>合作者返回时，快速定位修改位置，并和你的当前版本合并。</li>
+<li>而你的当前版本，可能已经不是当初交给合作者的版本了，甚至<code>push</code>到远程服务器了。（这不算第三个问题。）</li>
+</ol>
+<p>有时候你会觉得合作者的意见并不那么靠谱，但是沟通还得继续，他仍然是你的导师，你必须得让他知道你欣然接受了他的意见。这时候可以新开一个分支，用于接受合作者的意见并和他继续往来沟通，而论文的实际发布版本则在另一个分支上。</p>
+<p>总之，我们需要一个叫做<a
+href="https://link.zhihu.com/?target=https%3A//link.jianshu.com/%3Ft%3Dhttps%3A%2F%2Fgitlab.com%2Fgi1242%2Fgit-ident">git-ident</a>的Perl脚本帮我们自动化这些事情。步骤如下：</p>
+<ol type="1">
+<li>在你打算<code>commit</code>一个版本，并将这个版本发给合作者之前，在当前论文的根目录下创建/修改<code>.gitattributes</code>文件，内容为：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*.tex ident </span><br><span class="line">*.bib ident</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>然后在你要发给合作者的主文件里，如<code>main.tex</code>，加上一句包含<code>$Id$</code>的注释，如：</li>
+</ol>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% DO NOT EDIT -&gt; $Id$ &lt;- DO NOT EDIT</span></span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>安装<a
+href="https://link.zhihu.com/?target=https%3A//link.jianshu.com/%3Ft%3Dhttps%3A%2F%2Fgitlab.com%2Fgi1242%2Fgit-ident">git-ident</a>，并在你的论文根目录下添加它的post-commit
+hook：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> .git/hooks </span><br><span class="line">$ <span class="built_in">ln</span> -s /path/to/git-ident/post-commit</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li><code>commit</code>或者<code>checkout</code>你的论文，这时候Git会自动将<code>$Id$</code>替换为当前版本的SHA1值（并不是你commit的版本号）。</li>
+</ol>
+<p>这时候你就可以把你最新的<code>commit</code>的版本发给合作者了，静静地等待他的修改，或者自己继续写下一章节。等他返回给你的时候，执行</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /path/to/git-ident/git-find-commit.pl &lt;your_shared_tex_file&gt;.tex</span><br></pre></td></tr></table></figure>
+<p>脚本会输出你当时交给合作者的commit版本号，比如<code>b2234fa5</code>之类。根据这个版本号，你可以创建/转到你的co-author分支，保存他的修改，并<code>merge</code>到你的当前版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b co-author b2234fa5 </span><br><span class="line">$ &lt;save_his_file&gt; <span class="comment"># Save his file over yours </span></span><br><span class="line">$ git commit --author <span class="string">&#x27;Co Author &lt;who@doesnt.use.git&gt;&#x27;</span> </span><br><span class="line">$ git checkout my-writing </span><br><span class="line">$ git merge co-author</span><br></pre></td></tr></table></figure>
+<p>当你完成你对合作者这次修改的内容的编辑之后，可以重复这个流程，开始下一轮的“写作-合作者审阅-讨论并修订”了。</p>
+<p>注意：<code>git-ident</code>需要Perl环境，并安装<code>IPC::Run</code>和<code>IPC::System::Simple</code>模块。方式为：</p>
+<ol type="1">
+<li>执行<code>sudo cpan</code>进入cpan环境</li>
+<li>执行<code>install MODULE_NAME</code>安装模块</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
